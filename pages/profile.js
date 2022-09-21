@@ -1,8 +1,7 @@
 export default function Profile() {
-    return (
-      <>
-        <div>Carbon Gallery Profile page</div>
-      </>
-    );
-  }
-  
+  return (
+    <>
+      <h1>Welcome, Plaban</h1>
+    </>
+  );
+}
