@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Sidebar from "../components/sidebar";
 import Topbar from "../components/topbar";
 import styles from "../styles/Signup.module.css";
@@ -10,7 +11,7 @@ export default function SignUp() {
       <div className={styles.mainSection}>
         <div className={styles.center}>
           <h1>Create Account</h1>
-          <form>
+          <form autoComplete="off">
             <div className={styles.textField}>
               <input
                 type="text"
@@ -56,6 +57,12 @@ export default function SignUp() {
               <label htmlFor="password">Password</label>
             </div>
             <input type="submit" value="Sign Up" className={styles.submitBtn} />
+            <div className={styles.loginLink}>
+              Already have an account?{" "}
+              <Link href="/login">
+                <a>Login</a>
+              </Link>
+            </div>
           </form>
         </div>
       </div>
