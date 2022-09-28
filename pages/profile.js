@@ -1,9 +1,38 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
+import jwt from "jsonwebtoken";
 import Link from "next/link";
 import Sidebar from "../components/sidebar";
 import Topbar from "../components/topbar";
 import styles from "../styles/Profile.module.css";
 
 export default function Profile() {
+  const [name, setName] = useState();
+  const [email, setEmail] = useState();
+  const [username, setUsername] = useState();
+  const [password, setPassword] = useState();
+
+  const getUserInfo = async () => {
+    const token = localStorage.getItem("loginToken");
+    const tokenDecoded = jwt.decode(JSON.parse(token), { complete: true });
+    const username = tokenDecoded.payload.sub;
+
+    await axios
+      .get("http://127.0.0.1:8000/user/username/" + username)
+      .then((response) => {
+        console.log(response);
+        let { name, email, username } = response.data;
+        setName(name);
+        setEmail(email);
+        setUsername(username);
+      })
+      .catch((error) => console.error(error));
+  };
+
+  useEffect(() => {
+    getUserInfo();
+  }, []);
+
   return (
     <>
       <Topbar />
@@ -14,17 +43,17 @@ export default function Profile() {
         <div className={styles.usrDetails}>
           <p>
             <span>Name</span>
-            <span>Plaban</span>
+            <span>{name}</span>
             <span className={styles.detailsEditBtn}>Edit</span>
           </p>
           <p>
             <span>Email</span>
-            <span>Plaban@Plaban</span>
+            <span>{email}</span>
             <span className={styles.detailsEditBtn}>Edit</span>
           </p>
           <p>
             <span>Username</span>
-            <span>@Plaban</span>
+            <span>{username}</span>
             <span className={styles.detailsEditBtn}>Edit</span>
           </p>
           <p>
