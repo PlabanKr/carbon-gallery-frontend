@@ -10,7 +10,7 @@ export default function Login() {
       <Sidebar />
       <div className={styles.mainSection}>
         <div className={styles.center}>
-          <h1>Create Account</h1>
+          <h1>Login</h1>
           <form>
             <div className={styles.textField}>
               <input
