@@ -1,10 +1,26 @@
-import Image from "next/image";
+import { useState, useEffect } from "react";
+import axios from "axios";
 import Card from "../components/card/card";
 import Sidebar from "../components/sidebar";
 import Topbar from "../components/topbar";
 import styles from "../styles/Home.module.css";
 
 export default function Home() {
+  const [images, setImages] = useState();
+
+  useEffect(() => {
+    getImages();
+  });
+
+  const getImages = async () => {
+    try {
+      const response = await axios("http://127.0.0.1:8000/image/all");
+      setImages(response.data);
+    } catch (error) {
+      console.warn(error);
+    }
+  };
+
   return (
     <>
       <section>
