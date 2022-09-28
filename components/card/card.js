@@ -1,12 +1,9 @@
 import styles from "../../styles/Card.module.css";
 
-const Card = () => {
+const Card = ({ title, link }) => {
   return (
     <div className={styles.cardBody}>
-      <img
-        src="https://images.pexels.com/photos/2418645/pexels-photo-2418645.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-        alt="balloons"
-      />
+      <img src={link} alt={title} defer />
     </div>
   );
 };

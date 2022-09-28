@@ -6,11 +6,11 @@ import Topbar from "../components/topbar";
 import styles from "../styles/Home.module.css";
 
 export default function Home() {
-  const [images, setImages] = useState();
+  const [images, setImages] = useState([]);
 
   useEffect(() => {
     getImages();
-  });
+  }, []);
 
   const getImages = async () => {
     try {
@@ -47,10 +47,10 @@ export default function Home() {
           </div>
 
           <div className={styles.cardContainer}>
-            <Card />
-            <Card />
-            <Card />
-            <Card />
+            {images.map((img, index) => {
+              console.log(img);
+              return <Card link={img.link} title={img.title} key={index} />;
+            })}
           </div>
         </section>
       </section>
