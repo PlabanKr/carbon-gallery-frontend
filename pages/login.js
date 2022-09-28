@@ -1,9 +1,35 @@
+import axios from "axios";
+import { useState } from "react";
+import { useRouter } from "next/router";
+import jwt from "jsonwebtoken";
 import Link from "next/link";
 import Sidebar from "../components/sidebar";
 import Topbar from "../components/topbar";
 import styles from "../styles/Login.module.css";
 
 export default function Login() {
+  const [username, setUsername] = useState();
+  const [password, setPassword] = useState();
+
+  const router = useRouter();
+
+  const loginHandler = async (e) => {
+    e.preventDefault();
+    const data = {
+      username: username,
+      password: password,
+    };
+    const headers = { "Content-Type": "application/json" };
+    await axios
+      .post("http://127.0.0.1:8000/user/login", data, headers)
+      .then((response) => {
+        // console.log(response.data);
+        localStorage.setItem("loginToken", JSON.stringify(response.data.token));
+        router.push("/profile");
+      })
+      .catch((error) => console.error(error));
+  };
+
   return (
     <>
       <Topbar />
@@ -11,7 +37,7 @@ export default function Login() {
       <div className={styles.mainSection}>
         <div className={styles.center}>
           <h1>Login</h1>
-          <form>
+          <form onSubmit={loginHandler}>
             <div className={styles.textField}>
               <input
                 type="text"
@@ -19,6 +45,7 @@ export default function Login() {
                 id="username"
                 required
                 autoComplete="off"
+                onChange={(e) => setUsername(e.target.value)}
               />
               <span></span>
               <label htmlFor="username">UserName</label>
@@ -30,6 +57,7 @@ export default function Login() {
                 id="password"
                 required
                 autoComplete="nope"
+                onChange={(e) => setPassword(e.target.value)}
               />
               <span></span>
               <label htmlFor="password">Password</label>
