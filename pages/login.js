@@ -1,13 +1,15 @@
 import axios from "axios";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useRouter } from "next/router";
-import jwt from "jsonwebtoken";
+import { LoginContext, LoginContextProvider } from "../LoginContext";
 import Link from "next/link";
 import Sidebar from "../components/sidebar";
 import Topbar from "../components/topbar";
 import styles from "../styles/Login.module.css";
 
 export default function Login() {
+  const { isLoggedIn, setIsLoggedIn } = useContext(LoginContext);
+
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
 
@@ -25,6 +27,7 @@ export default function Login() {
       .then((response) => {
         // console.log(response.data);
         localStorage.setItem("loginToken", JSON.stringify(response.data.token));
+        setIsLoggedIn(true);
         router.push("/profile");
       })
       .catch((error) => console.error(error));
