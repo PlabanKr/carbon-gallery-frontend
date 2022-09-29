@@ -1,0 +1,43 @@
+.mainSection {
+  padding-top: 7rem;
+  margin-left: 8rem;
+  padding-left: 5rem;
+}
+
+.mainSection > h6 {
+  color: #424242;
+}
+
+.usrDetails {
+  border: 1px solid #424242;
+  width: 90%;
+  padding: 2rem;
+  margin-bottom: 5rem;
+}
+
+.usrDetails > p {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.detailsEditBtn {
+  grid-column: last-line;
+}
+
+.accDelete {
+  border: 1px solid #424242;
+  width: 90%;
+  padding: 2rem;
+}
+
+.accDelete > button {
+  border: none;
+  background-color: white;
+  font-weight: 500;
+  color: #ff0000;
+}
+
+.accDelete > button:hover {
+  color: #b10000;
+}
