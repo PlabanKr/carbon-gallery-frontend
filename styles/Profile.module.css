@@ -31,11 +31,13 @@
   padding: 2rem;
 }
 
-.accDelete > a {
+.accDelete > button {
+  border: none;
+  background-color: white;
   font-weight: 500;
   color: #ff0000;
 }
 
-.accDelete > a:hover {
+.accDelete > button:hover {
   color: #b10000;
 }

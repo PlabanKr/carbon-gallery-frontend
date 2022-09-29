@@ -1,12 +1,13 @@
 import axios from "axios";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import jwt from "jsonwebtoken";
-import Link from "next/link";
 import Sidebar from "../components/sidebar";
 import Topbar from "../components/topbar";
 import styles from "../styles/Profile.module.css";
 
 export default function Profile() {
+  const router = useRouter();
   const [name, setName] = useState();
   const [email, setEmail] = useState();
   const [username, setUsername] = useState();
@@ -27,6 +28,14 @@ export default function Profile() {
         setUsername(username);
       })
       .catch((error) => console.error(error));
+  };
+
+  const deleteUser = async () => {
+    await axios
+      .delete("http://127.0.0.1:8000/user/delete/" + username)
+      .then((response) => console.log(response))
+      .catch((error) => console.error(error));
+    router.push("/");
   };
 
   useEffect(() => {
@@ -65,9 +74,10 @@ export default function Profile() {
         <h6>Delete Account</h6>
         <div className={styles.accDelete}>
           <p>This will remove all of your personal data forever.</p>
-          <Link href="/">
+          {/* <Link href="/">
             <a>Delete my account</a>
-          </Link>
+          </Link> */}
+          <button onClick={deleteUser}>Delete my account</button>
         </div>
       </div>
     </>
